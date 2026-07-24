@@ -1,3 +1,0 @@
-/Users/akashfokane/Code/CHIP8_Emulator/build/CMakeFiles/chip8.dir
-/Users/akashfokane/Code/CHIP8_Emulator/build/CMakeFiles/edit_cache.dir
-/Users/akashfokane/Code/CHIP8_Emulator/build/CMakeFiles/rebuild_cache.dir

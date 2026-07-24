@@ -1,1 +1,0 @@
-/usr/bin/c++  -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/chip8.dir/src/chip8.cpp.o CMakeFiles/chip8.dir/src/main.cpp.o -o chip8 -F/Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk/System/Library/Frameworks  -Wl,-rpath,/opt/homebrew/lib /opt/homebrew/lib/libraylib.6.0.0.dylib -framework OpenGL
