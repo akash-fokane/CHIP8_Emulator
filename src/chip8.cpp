@@ -153,7 +153,10 @@ void Chip8::Cycle()
 
     //decode and exec
     (this->*table[(opcode & 0xF000) >> 12u])();
+}
 
+void Chip8::UpdateTimers()
+{
     //decrement delay timer if set
     if(delayTimer > 0)
     {
@@ -389,10 +392,12 @@ void Chip8::OP_Dxyn()
 
     for (auto j = 0; j < height; j++)
     {
+        if(yPos + j >= VIDEO_HEIGHT) break;
         uint8_t spriteByte = memory[index + j];
 
         for (auto i = 0; i < 8; i++)
         {
+            if(xPos + i >= VIDEO_WIDTH) break;
             uint8_t spritePixel = spriteByte & (0x80 >> i);
             uint32_t *screenPixel = &video[(yPos + j) * VIDEO_WIDTH + (xPos + i)];
 

@@ -15,6 +15,7 @@ public:
     Chip8();
     void loadROM(char const *filename);
     void Cycle();
+    void UpdateTimers();
 
     uint8_t keypad[16]{};
     uint32_t video[64 * 32]{};

@@ -25,12 +25,13 @@ int main(int argc, char* argv[])
     char const *rom = argv[3];
 
     InitWindow(VIDEO_WIDTH * SCALE, VIDEO_HEIGHT * SCALE, "CHIP-8 EMULATOR");
-    SetTargetFPS(60); 
+    SetTargetFPS(120); 
 
     Chip8 chip8;
     chip8.loadROM(rom);
 
-    auto LastTime = std::chrono::high_resolution_clock::now();
+    auto LastCycleTime = std::chrono::high_resolution_clock::now();
+    auto LastTimerTime = std::chrono::high_resolution_clock::now();
     //user input and update logic
     while(!WindowShouldClose())
     {
@@ -40,32 +41,35 @@ int main(int argc, char* argv[])
         }
 
         auto CurrentTime = std::chrono::high_resolution_clock::now();
-        float dt = std::chrono::duration<float, std::milli>(CurrentTime - LastTime).count();
 
+        float dt = std::chrono::duration<float, std::milli>(CurrentTime - LastCycleTime).count();
         if(dt > DELAY)
         {
-            LastTime = CurrentTime;
-
+            LastCycleTime = CurrentTime;
             chip8.Cycle();
+        }
 
-            BeginDrawing();
-		    ClearBackground(BLACK);
+        float timer_dt = std::chrono::duration<float, std::milli>(CurrentTime - LastTimerTime).count();   
+        if(timer_dt > 1000.0/60)
+        {
+            LastTimerTime = CurrentTime;
+            chip8.UpdateTimers();
+        }
 
-            // DrawText("Hello AKASH", 200,20,25,BEIGE);
-            // draw some text using the default font
-            
-            for (int y = 0; y < 32; y++)
+        BeginDrawing();
+        ClearBackground(BLACK);
+
+        for (int y = 0; y < 32; y++)
+        {
+            for (int x = 0; x < 64; x++)
             {
-                for (int x = 0; x < 64; x++)
+                if (chip8.video[y * 64 + x])
                 {
-                    if (chip8.video[y * 64 + x])
-                    {
-                        DrawRectangle(x * SCALE, y * SCALE, SCALE, SCALE, WHITE);
-                    }
+                    DrawRectangle(x * SCALE, y * SCALE, SCALE, SCALE, WHITE);
                 }
             }
-            EndDrawing();
         }
+        EndDrawing();
     }
     
     CloseWindow();
