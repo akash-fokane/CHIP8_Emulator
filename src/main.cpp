@@ -51,8 +51,9 @@ int main(int argc, char* argv[])
             BeginDrawing();
 		    ClearBackground(BLACK);
 
-            // draw some text using the default font
             // DrawText("Hello AKASH", 200,20,25,BEIGE);
+            // draw some text using the default font
+            
             for (int y = 0; y < 32; y++)
             {
                 for (int x = 0; x < 64; x++)
