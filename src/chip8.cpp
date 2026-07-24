@@ -4,11 +4,6 @@
 
 const uint16_t START_ADDRESS = 0x200;
 
-const uint16_t FONTSET_SIZE = 80;
-const uint16_t FONTSET_START_ADDRESS = 0x50;
-const uint16_t VIDEO_WIDTH = 64;
-const uint16_t VIDEO_HEIGHT = 32;
-
 uint8_t fontset[FONTSET_SIZE] =
 {
 	0xF0, 0x90, 0x90, 0x90, 0xF0, // 0
@@ -35,7 +30,7 @@ void Chip8::loadROM(char const *filename)
 
     if(file.is_open())
     {
-        std::streamsize size = file.tellg()
+        std::streamsize size = file.tellg();
         //implement uniqe_ptr later
         char *buffer = new char[size];
 
@@ -62,7 +57,7 @@ Chip8::Chip8()
     randByte = std::uniform_int_distribution<uint8_t>(0, 255U);
 
     //load fonts to memory
-    for (auto i = 0; i < FONTSET_SIZE i++)
+    for (auto i = 0; i < FONTSET_SIZE; i++)
     {
         memory[FONTSET_START_ADDRESS + i] = fontset[i];
     }
@@ -160,13 +155,13 @@ void Chip8::Cycle()
     (this->*table[(opcode & 0xF000) >> 12u])();
 
     //decrement delay timer if set
-    if(delayTimer)
+    if(delayTimer > 0)
     {
         delayTimer--;
     }
 
     //decrement sound timer if set
-    if(soundTimer)
+    if(soundTimer > 0)
     {
         soundTimer--;
     }

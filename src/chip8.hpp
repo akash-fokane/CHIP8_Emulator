@@ -3,6 +3,11 @@
 #include <cstdint>
 #include <random>
 
+const uint16_t FONTSET_SIZE = 80;
+const uint16_t FONTSET_START_ADDRESS = 0x50;
+const uint16_t VIDEO_WIDTH = 64;
+const uint16_t VIDEO_HEIGHT = 32;
+
 class Chip8
 {
 public:
@@ -10,6 +15,9 @@ public:
     Chip8();
     void loadROM(char const *filename);
     void Cycle();
+
+    uint8_t keypad[16]{};
+    uint32_t video[64 * 32]{};
 
 private:
 
@@ -63,8 +71,6 @@ private:
     uint8_t sp{};
     uint8_t delayTimer{};
     uint8_t soundTimer{};
-    uint8_t keypad[16]{};
-    uint32_t video[64 * 32]{};
     uint16_t opcode;
 
     std::default_random_engine randGen;
@@ -77,4 +83,4 @@ private:
     Chip8Func tableE[0xE + 1];
     Chip8Func tableF[0x65 + 1];
 
-}
+};
