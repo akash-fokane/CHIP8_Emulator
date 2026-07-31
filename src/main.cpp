@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
     char const *rom = argv[3];
 
     InitWindow(VIDEO_WIDTH * SCALE, VIDEO_HEIGHT * SCALE, "CHIP-8 EMULATOR");
-    SetTargetFPS(120); 
+    SetTargetFPS(0); 
 
     Chip8 chip8;
     chip8.loadROM(rom);
@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
             {
                 if (chip8.video[y * 64 + x])
                 {
-                    DrawRectangle(x * SCALE, y * SCALE, SCALE, SCALE, WHITE);
+                    DrawRectangle(x * SCALE, y * SCALE, SCALE, SCALE, LIME);
                 }
             }
         }
