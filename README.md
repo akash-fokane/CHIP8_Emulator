@@ -6,7 +6,7 @@ A CHIP-8 interpreter/emulator written in C++, rendered with [raylib](https://www
 
 | Pong | Tetris |
 |:---:|:---:|
-| ![Pong](assets/pong.gif) | ![Tetris](assets/tetris.gif) |
+| ![Ping-Pong](assets/pong.gif) | ![Tetris](assets/tetris.gif) |
 
 ## Features
 
